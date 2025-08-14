@@ -3,7 +3,7 @@ import { supabase } from '../utils/Supabase';
 import Sidebar from '../components/Sidebar';
 import { messagesData } from '../assets/data';
 import ViewMessage from '../components/ViewMessage';
-import { useAppContext } from '../contexts/appContext';
+import { useAppContext } from '../contexts/AppContext';
 import ApiKeysComponent from '../components/ApiKeysComponent';
 import ProfileSettings from '../components/ProfileSettings';
 import ApiDocs from '../components/ApiDocs';
