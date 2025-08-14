@@ -6,7 +6,6 @@ import AuthWrapper from './components/AuthWrapper'
 import Sidebar from './components/Sidebar'
 import Messages from './pages/Messages'
 import Settings from './pages/Settings'
-import DonateModal from './components/DonateModal'
 import { useAppContext } from './contexts/AppContext'
 
 
