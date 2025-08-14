@@ -93,9 +93,10 @@ const getTimeAgo = (timestamp) => {
     <div className='flex' >
         <Sidebar/>
         <div className='lg:px-[30px] lg:w-[350px] md:px-[20px] md:w-[250px] scrollbar-hide scrollbar-hide::-webkit-scrollbar pt-[30px] border border-gray-100 h-[100vh] overflow-y-auto overflow-x-hidden'>
-         {loading ? <Lottie animationData={loading_anim} loop={true} className='w-[200px] mt-[200px]'/>
+         {loading || messages.length<1 ? <Lottie animationData={loading_anim} loop={true} className='w-[200px] mt-[200px]'/>
                         : ''}
         
+            
             {messages?.map((item)=> {
 
                 const truncate = (str, n) => {
@@ -106,6 +107,7 @@ const getTimeAgo = (timestamp) => {
             return (
                 
 
+                
                     
                     <div key={item.id} onClick={()=> handleMessageSelector(item.id)} className={`px-[20px] md:ml-[0px] lg:ml-[0px]  ml-[10px] py-[20px] lg:w-[300px] md:w-[300px] w-[270px] h-[120px]  rounded-xl my-[10px] bg-gray-50 ${activeMessageId===item.id ? 'bg-purple-50': ''} cursor-pointer transition-all hover:scale-105`}>
                         
