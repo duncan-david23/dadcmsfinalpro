@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Lottie from "lottie-react";
 import mail_animation from '../animation/mail_animation.json';
 import Newmail_anim from '../animation/Newmail_anim.json';
+import delete_anim from '../animation/delete_anim.json';
 import { useAppContext } from '../contexts/AppContext';
 import { messagesData } from '../assets/data';
 import axios from 'axios'
@@ -65,13 +66,36 @@ const formatDate = (timestamp) => {
   });
 }
 
+// Function to delete a message
+
+  const handleDelete = async(messageId)=> {
+
+      const { data: { session } } = await supabase.auth.getSession();
+      const accessToken = session?.access_token;
+      try {
+        const result = await axios.delete(`https://smart-btn-backend.onrender.com/api/users/delete-message/${messageId}`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+        window.location.reload();
+      
+      } catch (error) {
+        console.error("An error occurred while deleting messages data", error);
+      }
+
+
+  }
+
 
   return (
-    <div className='lg-ml-[30px] px-[50px] pt-[30px] flex-1 lg:block md:block hidden  scrollbar-hide scrollbar-hide::-webkit-scrollbar  h-[100vh] overflow-y-auto overflow-x-hidden'>
+    <div className=' relative lg-ml-[30px] px-[50px] pt-[30px] flex-1 lg:block md:block hidden  scrollbar-hide scrollbar-hide::-webkit-scrollbar  h-[100vh] overflow-y-auto overflow-x-hidden'>
       {!messageData ? 
         <Lottie animationData={Newmail_anim} loop={true} className='w-[120px] flex mx-auto mt-[300px]' />
         :
         <>
+        
+          <Lottie animationData={delete_anim} loop={true} className='w-[40px] absolute top-[50px] right-[200px] cursor-pointer hover:scale-130  transition-all' onClick={() => handleDelete(messageData.id)} />
           <h1 className='font-bold text-xl'>{messageData.subject}</h1>
           <div className='flex items-center'>
             <Lottie animationData={mail_animation} loop={true} className='w-[80px]' />
