@@ -57,7 +57,7 @@ const Login = () => {
                 <input type="email" placeholder='email' value={email} onChange={(e)=> setEmail(e.target.value)} className='w-full h-[30px] border border-gray-200 px-[20px] py-[20px] rounded-lg my-[8px]' />
                 <input type="password" placeholder='password' value={password} onChange={(e)=> setPassword(e.target.value)}  className='w-full h-[30px] border border-gray-200 px-[20px] py-[20px] rounded-lg my-[8px]' />
                 <div>
-                    <p className='text-xs text-gray-400'>Forgot Password?</p>
+                    {/* <p className='text-xs text-gray-400'>Forgot Password?</p> */}
                 </div>
                 <div>
                     <button type='submit' className='bg-purple-700 text-white py-[10px] px-[20px] w-full mt-[20px] rounded-lg hover:bg-purple-800 transition-all'>Continue</button>

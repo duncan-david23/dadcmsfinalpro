@@ -74,7 +74,7 @@ const handleSignOut = async () => {
                 </div>
 
                 <div>
-                    <p className='text-gray-400 lg:block md:block text-sm m hidden'>{msDataLength  || 0}</p>
+                    <p className='lg:block md:block text-sm m hidden text-purple-500'>{msDataLength  || 0}</p>
                 </div>
             </div>
 

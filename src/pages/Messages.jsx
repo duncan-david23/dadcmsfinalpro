@@ -6,6 +6,9 @@ import ViewMessage from '../components/ViewMessage';
 import axios from 'axios'
 import Lottie from "lottie-react";
 import loading_anim from '../animation/loading_anim.json'
+import mail_animation from '../animation/mail_animation.json';
+
+
 
 const Messages = () => {
     const [messageId, setMessageId] = useState()
@@ -93,9 +96,16 @@ const getTimeAgo = (timestamp) => {
     <div className='flex' >
         <Sidebar/>
         <div className='lg:px-[30px] lg:w-[350px] md:px-[20px] md:w-[250px] scrollbar-hide scrollbar-hide::-webkit-scrollbar pt-[30px] border border-gray-100 h-[100vh] overflow-y-auto overflow-x-hidden'>
-         {loading || messages.length<1 ? <Lottie animationData={loading_anim} loop={true} className='w-[200px] mt-[200px]'/>
+         {loading ? <Lottie animationData={loading_anim} loop={true} className='w-[200px] mt-[200px]'/>
                         : ''}
         
+        {!loading && messages.length <1 ? 
+          <div>
+            <Lottie animationData={mail_animation} loop={true} className='w-[120px] mx-auto mt-[300px]' /> 
+            <p className='text-xs text-gray-300 mt-[-15px] text-center'>You have no messages</p>
+          </div>
+        
+        : ''}
             
             {messages?.map((item)=> {
 
@@ -109,7 +119,7 @@ const getTimeAgo = (timestamp) => {
 
                 
                     
-                    <div key={item.id} onClick={()=> handleMessageSelector(item.id)} className={`px-[20px] md:ml-[0px] lg:ml-[0px]  ml-[10px] py-[20px] lg:w-[300px] md:w-[300px] w-[270px] h-[120px]  rounded-xl my-[10px] bg-gray-50 ${activeMessageId===item.id ? 'bg-purple-50': ''} cursor-pointer transition-all hover:scale-105`}>
+                    <div key={item.id} onClick={()=> handleMessageSelector(item.id)} className={`px-[20px] md:ml-[0px] lg:ml-[0px]  ml-[10px] py-[20px] lg:w-[300px] md:w-[300px] w-[270px] h-[120px] border-l-3 border-purple-500  rounded-xl my-[10px] bg-gray-50 ${activeMessageId===item.id ? 'bg-purple-500': ''} cursor-pointer transition-all hover:scale-105`}>
                         
                         <>
                         <div className='flex items-center justify-between w-full'>
@@ -117,11 +127,11 @@ const getTimeAgo = (timestamp) => {
                                 {item.read===false && 
                                     <p className='w-[10px] h-[10px] bg-blue-600 rounded-full'></p>
                                 }
-                                <p className='text-gray-700 font-semibold text-sm'>{truncate(item.subject, 20)}</p>
+                                <p className={`text-gray-700 font-semibold text-sm ${activeMessageId===item.id ? 'text-white': ''}`}>{truncate(item.subject, 20)}</p>
                             </div>
                             <p className='text-gray-400 text-xs font-thin'>{getTimeAgo(item.created_at)}</p>
                         </div>
-                        <p className=' mt-[15px] text-gray-500 font-thin text-xs'>{truncate(item.sender_message, 120)}</p>
+                        <p className={`mt-[15px] text-gray-500 font-thin text-xs ${activeMessageId===item.id ? 'text-white': ''}`}>{truncate(item.sender_message, 120)}</p>
                         </>
                            
                     </div>
